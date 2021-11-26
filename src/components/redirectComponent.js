@@ -16,13 +16,7 @@
     }
 
     function prodEnvironment() {
-      return (
-        <div>
-          <a className={classes.root} href="https://google.com">
-            Redirect me!
-          </a>
-        </div>
-      );
+      window.location.replace('https://www.google.com');
     }
 
     return isDev ? devEnvironment() : prodEnvironment();
