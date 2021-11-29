@@ -72,6 +72,12 @@
             },
           },
         },
+        {
+          type: 'TEXT',
+          label: 'Button text',
+          key: 'redirectButtonText',
+          value: 'Ya ya yeet',
+        },
       ],
       descendants: [],
     },

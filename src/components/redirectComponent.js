@@ -5,7 +5,13 @@
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const { env, useEndpoint } = B;
-    const { linkType, linkToInternal, linkToExternal } = options;
+    const { Button } = window.MaterialUI.Core;
+    const {
+      linkType,
+      linkToInternal,
+      linkToExternal,
+      redirectButtonText,
+    } = options;
 
     const isDev = env === 'dev';
 
@@ -19,25 +25,8 @@
 
     const internalEndpoint = hasInternalLink && useEndpoint(linkToInternal);
 
-    function devEnvironment() {
-      return (
-        <div>
-          <h1 className={classes.root}>Redirect component.</h1>
-          <pre>Doing a redirect to an {linkType} page.</pre>
-        </div>
-      );
-    }
-
-    function prodEnvironment() {
-      return (
-        <div>
-          <h1 className={classes.root}>Redirect component.</h1>
-          <pre>Doing a redirect to an {linkType} page.</pre>
-        </div>
-      );
-    }
-
-    B.defineFunction('Redirect Function', e => {
+    B.defineFunction('redirectFunction', e => {
+      console.log('redirectFunction FIRED!');
       if (hasInternalLink) {
         return history.push(internalEndpoint);
       }
@@ -49,6 +38,40 @@
       }
       return null;
     });
+
+    function componentDescription() {
+      return (
+        <>
+          <h1 className={classes.root}>Redirect component.</h1>
+          <pre>Doing a redirect to an {linkType} page.</pre>
+        </>
+      );
+    }
+
+    function devEnvironment() {
+      return (
+        <div>
+          {componentDescription()}
+          <Button>{redirectButtonText}</Button>
+        </div>
+      );
+    }
+
+    function prodEnvironment() {
+      return (
+        <div>
+          {componentDescription()}
+          <Button
+            onMouseEnter={() => {
+              console.log('y0');
+              B.triggerEvent('redirectFunction');
+            }}
+          >
+            {redirectButtonText}
+          </Button>
+        </div>
+      );
+    }
 
     return isDev ? devEnvironment() : prodEnvironment();
   })(),
