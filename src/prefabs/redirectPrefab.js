@@ -23,6 +23,10 @@
                 name: 'External page',
                 value: 'external',
               },
+              {
+                name: 'Action',
+                value: 'action',
+              },
             ],
           },
         },
@@ -51,6 +55,20 @@
               option: 'linkType',
               comparator: 'EQ',
               value: 'internal',
+            },
+          },
+        },
+        {
+          type: 'ACTION',
+          label: 'Redirect action',
+          key: 'actionId',
+          value: '',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'linkType',
+              comparator: 'EQ',
+              value: 'action',
             },
           },
         },

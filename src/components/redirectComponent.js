@@ -37,11 +37,17 @@
       );
     }
 
-    B.defineFunction('Execute redirect component', () => {
+    B.defineFunction('Redirect Function', e => {
+      if (hasInternalLink) {
+        return history.push(internalEndpoint);
+      }
       if (hasExternalLink) {
         return window.location.replace(linkToExternal);
       }
-      return history.push(internalEndpoint);
+      if (linkType === 'action') {
+        return window.location.replace(e);
+      }
+      return null;
     });
 
     return isDev ? devEnvironment() : prodEnvironment();
