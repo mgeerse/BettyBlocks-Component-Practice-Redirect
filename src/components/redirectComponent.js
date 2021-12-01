@@ -26,7 +26,6 @@
     const internalEndpoint = hasInternalLink && useEndpoint(linkToInternal);
 
     B.defineFunction('redirectFunction', e => {
-      console.log('redirectFunction FIRED!');
       if (hasInternalLink) {
         return history.push(internalEndpoint);
       }
